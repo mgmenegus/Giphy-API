@@ -8,11 +8,11 @@
    <div class="container">
     <h1>Racing Search</h1>
       <div id="race-view"></div>
-        <form id="race-form">
+        <div id="race-gifs">
           
          
 
-       </form>
+       </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
@@ -26,42 +26,47 @@
         for (var i = 0; i < topics.length; i++){
           var a = $("<button>");
           a.addClass("topics");
-          a.attr("data");
+          a.attr("data-topic", topics[i]);
           a.text(topics[i]);
           $("#race-view").append(a);
 
-          $("button").on("click", function(){
-            var topics = $(this[i]).attr("data");
+          a.on("click", function(){   
+            var btnTopic = $(this).attr("data-topic");
+            makeCall(btnTopic);
+            console.log("CUnt");
+          });
+          };
+        }
 
-            var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=u2yzES4KJLbZ1BRW8qSBq6G8VcC3SG7y";
-
-           $.ajax({
+      function makeCall(btnTopic){
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + btnTopic + "&api_key=u2yzES4KJLbZ1BRW8qSBq6G8VcC3SG7y";
+        console.log(btnTopic);
+          $.ajax({
             url: queryURL,
             method: 'GET'
-            })
-
-              .then(function(response) {
+            }).then(function(response) {
                 var results = response.data;
-                for (var i = 0; i < results.length; i++){
+                for (var i = 0; i < 10; i++){
 
                   if (results[i].rating !== "r" && results[i].rating !== "pg-13"){
-                    var gifDiv = $("<div class='item'>");
+                    var gifDiv = $("#race-gifs");
                     var rating = results[i].rating;
-                    var x = $ ("<p>").text("Rating: " + rating);
+                    var x = $("<p>").text("Rating: " + rating);
                     var raceImage = $("<img>");
 
                     raceImage.attr("src", results[i].images.fixed_height.url);
 
-                    gifDiv.append(p);
+                    gifDiv.append(x);
                     gifDiv.append(raceImage);
                   }
-
+                 }
+                });
               }
-                renderButtons();
-          })
-      };
-      
+            renderButtons();
 
+               });
+              
+          
        
     
 
