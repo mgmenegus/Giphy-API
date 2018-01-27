@@ -12,6 +12,7 @@
           <label for="race-input">New Race</label>
           <input type="text" id="movie-input"><br>
          <input id="add-race" type="submit" value="Go Time">
+
        </form>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -26,15 +27,16 @@
       method: 'GET'
 
     });.then(function(response) {
+      q="cars";
        
       var topics =["Drifting", "Formula 1", "Group B", "Time Attack", "Hill Climb", "Rally", "Gymkhana", "Drag Racing", "Initial D"];
 
-      funtion renderButtons(){
+        funtion renderButtons(){
         $("#race-view").empty();
         for (var i = 0; i < topics.length; i++){
           var a = $("<button>");
           a.addClass("topics");
-          a.attr("data: ")
+          a.attr(": ")
           a.text(topics[i]);
           $("#race-view").append(a);
       }
