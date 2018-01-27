@@ -16,7 +16,6 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
-    var topics =["Drifting", "Formula 1", "Group B", "Time Attack", "Hill Climb", "Rally", "Gymkhana", "Drag Racing", "Initial D"];
     //var searchTerm = prompt('');
     //topics = topics.trim().replace(/ /g, "+");
    //('GET', 'http://api.giphy.com/v1/gifs/search?q=' + "" + '&api_key=u2yzES4KJLbZ1BRW8qSBq6G8VcC3SG7y');
@@ -25,16 +24,19 @@
     $.ajax({
       url: queryURL,
       method: 'GET'
-    });//.then(function(response) {
-        
-    funtion renderButtons(){
-      $("#race-view").empty();
-      for (var i = 0; i <topics.length; i++){
-        var a = $("<button>");
-        a.addClass("topics");
-        a.attr("data: ")
-        a.text(topics[i]);
-        $("#race-view").append(a);
+
+    });.then(function(response) {
+       
+      var topics =["Drifting", "Formula 1", "Group B", "Time Attack", "Hill Climb", "Rally", "Gymkhana", "Drag Racing", "Initial D"];
+
+      funtion renderButtons(){
+        $("#race-view").empty();
+        for (var i = 0; i < topics.length; i++){
+          var a = $("<button>");
+          a.addClass("topics");
+          a.attr("data: ")
+          a.text(topics[i]);
+          $("#race-view").append(a);
       }
     }  
     
