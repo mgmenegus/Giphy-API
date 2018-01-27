@@ -9,41 +9,61 @@
     <h1>Racing Search</h1>
       <div id="race-view"></div>
         <form id="race-form">
-          <label for="race-input">New Race</label>
-          <input type="text" id="movie-input"><br>
-         <input id="add-race" type="submit" value="Go Time">
+          
+         
 
        </form>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
-    //var searchTerm = prompt('');
-    //topics = topics.trim().replace(/ /g, "+");
-   //('GET', 'http://api.giphy.com/v1/gifs/search?q=' + "" + '&api_key=u2yzES4KJLbZ1BRW8qSBq6G8VcC3SG7y');
-    var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=u2yzES4KJLbZ1BRW8qSBq6G8VcC3SG7y";
+    $(document).ready(function() {
+     console.log( "ready!" ); 
 
-    $.ajax({
-      url: queryURL,
-      method: 'GET'
+   var topics =["Drifting", "Formula 1", "Group B", "Time Attack", "Hill Climb", "Rally", "Gymkhana", "Drag Racing", "Initial D"];
 
-    });.then(function(response) {
-      q="cars";
-       
-      var topics =["Drifting", "Formula 1", "Group B", "Time Attack", "Hill Climb", "Rally", "Gymkhana", "Drag Racing", "Initial D"];
-
-        funtion renderButtons(){
+     function renderButtons(){
         $("#race-view").empty();
         for (var i = 0; i < topics.length; i++){
           var a = $("<button>");
           a.addClass("topics");
-          a.attr(": ")
+          a.attr("data");
           a.text(topics[i]);
           $("#race-view").append(a);
-      }
-    }  
+
+          $("button").on("click", function(){
+            var topics = $(this[i]).attr("data");
+
+            var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=u2yzES4KJLbZ1BRW8qSBq6G8VcC3SG7y";
+
+           $.ajax({
+            url: queryURL,
+            method: 'GET'
+            })
+
+              .then(function(response) {
+                var results = response.data;
+                for (var i = 0; i < results.length; i++){
+
+                  if (results[i].rating !== "r" && results[i].rating !== "pg-13"){
+                    var gifDiv = $("<div class='item'>");
+                    var rating = results[i].rating;
+                    var x = $ ("<p>").text("Rating: " + rating);
+                    var raceImage = $("<img>");
+
+                    raceImage.attr("src", results[i].images.fixed_height.url);
+
+                    gifDiv.append(p);
+                    gifDiv.append(raceImage);
+                  }
+
+              }
+                renderButtons();
+          })
+      };
+      
+
+       
     
-
-
 
 
   </script>
